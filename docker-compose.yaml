@@ -1,0 +1,42 @@
+# - - - - - - - - - - - - - - - - - - - - - - 
+
+# This is the docker compose file for enabling load the file to a PostgreSQL db
+# It depicts the docker compose version, v3.9
+# - sets our services list(containers) to postgres
+# - grabs postgres image v14
+# - sets custom container name to nyc_taxi_postgres
+# - asks yaml to restart db always in case container stops, if anything happens
+# - logins for postgres container; nyc_user, pass, and name of db to create
+# - allows port 5432 as default for pgAdmin, python to communicate, listen to each other 
+# - creates volume to store data and declares that volume
+# - docker compose up -d, starts services listed in background
+
+# Author: Sharon Kawira
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+version: '3.9'
+services:
+  postgres:
+    image: postgres:14
+    container_name: nyc_taxi_postgres
+    restart: always
+
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nyc_taxi_db
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data: 
+
+    
+
+
+
